@@ -32,3 +32,10 @@ For example to fetch the list of italian meps:
 cd src
 python3 scrape_list_of_meps.py "https://www.europarl.europa.eu/meps/en/download/advanced/xml?name=&countryCode=IT" --output 'data/meps_it.csv' 
 ```
+
+### Scrape speeches given a list of meps
+
+TODO
+
+
+

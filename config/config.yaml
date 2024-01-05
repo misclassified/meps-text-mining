@@ -1,0 +1,23 @@
+
+meps_list:
+  output_dir: 'data/country_meps'
+
+meps_speeches:
+  europal_website: 'https://www.europarl.europa.eu'
+  href_root: 'https://www.europarl.europa.eu/meps/en/'
+  output_dir: 'data/meps_plenary_speeches'
+
+  # Configure logging 
+  logs_dir: 'logs'
+  logs_filename: 'scraping_speeches.txt'
+
+
+meps_speeches_dataframe:
+  output_dir: 'data/meps_speeches_dataframe'
+  filename: 'meps_speeches.csv'
+
+
+meps_speeches_en_translation:
+  output_dir: 'data/meps_speeches_en_translations'
+  filename: 'speeches_translations.txt'
+  logs_filename: 'translating_speeches.txt'
