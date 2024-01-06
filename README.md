@@ -33,9 +33,33 @@ cd src
 python3 scrape_list_of_meps.py "https://www.europarl.europa.eu/meps/en/download/advanced/xml?name=&countryCode=IT" --output 'data/meps_it.csv' 
 ```
 
+In this code the --ouptut parameter is where you save the output file.
+
+
 ### Scrape speeches given a list of meps
 
-TODO
+Once you have the list of Meps you can start scraping the speeches from the europarl website. **Note** -> The list of maps is a csv file with the following columns: 
 
+| Column      | Description |
+| ----------- | ----------- |
+| fullName      | Str: Name of the MP     |
+| country   | Str: MP Country        |
+| politicalGroup   | Str: Europarl political group        |
+| id   | Int: ID required to build the speeches url for every single MP |
+| nationalPoliticalGroup   | Str: National Political Group     |
 
+To scrape a new list of MEPS run the following command 
 
+```
+cd src
+python scrape_meps_speeches.py <meps list location>
+```
+
+If you simply want to update a set of already scraped speeches run the following command instead
+
+```
+cd src
+python scrape_meps_speeches.py <meps list location> --update True
+```
+
+Note: the scraping process is deliberately slow, with added sleep time to be respectul of the Europarliamt Website and not cause any harm to users. 

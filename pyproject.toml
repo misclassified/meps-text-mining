@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "meps-text-mining"
+version = "0.1.0"
+description = "Meps public speeches scraper for text analytics"
+authors = ["misclassified"]
+readme = "README.md"
+packages = [{include = "meps_text_mining"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0"
+beautifulsoup4 = "^4.12.2"
+load-dotenv = "^0.1.0"
+numpy = "^1.26.3"
+openai = "^1.6.1"
+pandas = "^2.1.4"
+requests = "^2.31.0"
+selenium = "^4.16.0"
+PyYAML = "^6.0.1"
+llama-index = "^0.9.25.post1"
+transformers = "^4.36.2"
+torch = "^2.1.2"
+
+
+[tool.poetry.group.dev.dependencies]
+torch = "^2.1.2"
+bitsandbytes = "^0.41.3.post2"
+sentencepiece = "^0.1.99"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
