@@ -184,9 +184,12 @@ def scrape_speeches(meps, europal_website, href_root, output_dir):
 
         # Agree on cookies to allow further action
         time.sleep(5)
-        cookie_button = driver.find_element(By.CLASS_NAME, 'epjs_agree')
-        actions = ActionChains(driver)
-        actions.move_to_element(cookie_button).click().perform()
+        try:
+            cookie_button = driver.find_element(By.CLASS_NAME, 'epjs_agree')
+            actions = ActionChains(driver)
+            actions.move_to_element(cookie_button).click().perform()
+        except:
+            pass
 
         # Find all the interventions made by MP
         # load_more_button = driver.find_element(By.CLASS_NAME, 'europarl-expandable-async-loadmore')
@@ -264,8 +267,8 @@ def scrape_speeches(meps, europal_website, href_root, output_dir):
                 namedtuples_list.append(named_tuple)
             
             # Save results to a csv page
-            if saved_df: 
-                res_df = pd.concat(saved_df, pd.DataFrame(namedtuples_list))
+            if saved_df is not None: 
+                res_df = pd.concat([saved_df, pd.DataFrame(namedtuples_list)])
             else: 
                 res_df = pd.DataFrame(namedtuples_list)
             res_df.to_csv(outpath, index = False)
@@ -316,11 +319,11 @@ def main():
     print(args.update)
 
     if args.update:
-        scrape_speeches(meps_temp, europal_website, href_root, output_dir)
         print(f"""Found {len(meps_temp)} meps to scrape""")
+        scrape_speeches(meps_temp, europal_website, href_root, output_dir)
     else:
-        scrape_speeches(meps, europal_website, href_root, output_dir)
         print(f"""Found {len(meps)} meps to scrape""")
+        scrape_speeches(meps, europal_website, href_root, output_dir)
 
 
 if __name__ == "__main__":
