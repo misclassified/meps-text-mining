@@ -150,7 +150,7 @@ def scrape_speeches(meps, europal_website, href_root, output_dir):
 
     for mep in meps.itertuples():
 
-        time.sleep(5)
+        time.sleep(2)
 
         name = mep.fullName
         id = mep.id
@@ -160,7 +160,6 @@ def scrape_speeches(meps, europal_website, href_root, output_dir):
         logging.info(f"--------------- Start Processing {name}")
 
         # Check if a file with the same name exist already
-
 
         # Find all page hrefs
         hrefs = find_hrefs(mep_href)
@@ -216,6 +215,7 @@ def scrape_speeches(meps, europal_website, href_root, output_dir):
 
             except Exception as e:
                 print(f"No more speeches available or some generic error to check")
+                logging.info(f"No more speeches available or some generic error to check")
                 break
 
         print(f'Stopped fetching list of speeches for {name}')
@@ -224,6 +224,7 @@ def scrape_speeches(meps, europal_website, href_root, output_dir):
         # Fetch results from page
         speeches_available = fetch_results(driver.page_source)
         speeches_available = [(name,) + x for x in speeches_available]
+        logging.info(f'There are {len(speeches_available)} speeches we could scrape')
 
         # ---- PART 2
         # Extract the content of each intervention to plenary debates
@@ -231,6 +232,7 @@ def scrape_speeches(meps, europal_website, href_root, output_dir):
         # Find which speeches we need to scrape
         try:
             saved_df = pd.read_csv(outpath)
+            logging.info(f'We previously scraped {len(saved_df)} speeches')
             already_scraped_speeches = saved_df['Url'].tolist()
             speeches_to_scrape= [
                 tup for tup in speeches_available if tup[2] not in already_scraped_speeches]
@@ -255,7 +257,7 @@ def scrape_speeches(meps, europal_website, href_root, output_dir):
 
             for speech in speeches_to_scrape:
 
-                time.sleep(2)
+                time.sleep(1)
 
                 mp, title, url  = speech
                 logging.info(f'Extracting content from  {url} for {mp}')
@@ -285,19 +287,20 @@ def main():
     args = parser.parse_args()
 
     # Configuration
-    current_directory = os.path.dirname(os.path.abspath(os.getcwd()))
+    root_directory = os.path.dirname(os.path.abspath(os.getcwd()))
   
     # Load config file
-    with open('../config/config.yaml', 'r') as file:
+    config_path = 'meps-text-mining/config/config.yaml'
+    with open(os.path.join(root_directory, config_path), 'r') as file:
         config = yaml.safe_load(file)
 
     europal_website = config['meps_speeches']['europal_website']
     href_root = config['meps_speeches']['href_root']
-    output_dir = os.path.join(current_directory, config['meps_speeches']['output_dir'])
+    output_dir = os.path.join(root_directory, config['meps_speeches']['output_dir'])
     print(output_dir)
 
     # Configure logging 
-    logs_dir = os.path.join(current_directory, config['meps_speeches']['logs_dir'])
+    logs_dir = os.path.join(root_directory, config['meps_speeches']['logs_dir'])
     logs_filename = config['meps_speeches']['logs_filename']
     print(logs_dir)
 
@@ -312,7 +315,7 @@ def main():
     meps_temp = pd.read_csv(args.input_dir)
 
     # Check if meps were already scraped
-    already_scraped_directory = os.path.join(current_directory, config['meps_speeches']['output_dir'])
+    already_scraped_directory = os.path.join(root_directory, config['meps_speeches']['output_dir'])
     df = join_csv_files(already_scraped_directory)
 
     meps = meps_temp[~meps_temp['fullName'].isin(df['MP'].tolist())]

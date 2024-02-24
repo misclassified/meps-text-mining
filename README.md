@@ -8,6 +8,25 @@ sentiment is attached to those topics.
 
 The project uses ChatGPT for text analysis.
 
+# Scraper
+
+I used Selenium with chromedriver for scraping. One pre-requirement to run the scraper is that you have chromedriver driver binaries on your computer. The driver should be in the same version of your current Chromer browser. The drivers can be dowloaded from: https://chromedriver.chromium.org/. Installation depends on your operating system, there are plenty of web resources with step by step. Generally speaking the chromedrive should be in your system path, which usually is /usr/local/bin/
+
+On a MAC the easiest was to use Homebrew with cask, which will place the drivers in the opt/homebrew/caskroom folder:
+
+```
+brew install --cask chromedriver
+brew upgrade --cask chromedriver
+```
+
+Once you have chromedriver on your computer you can install all the dependencies of the the project with poetry (a very useful package manager):
+
+```
+pip install poetry
+poetry shell
+poetry install
+```
+
 
 ### Scrape list of meps for a given country
 
@@ -21,16 +40,14 @@ To fecth the list of MEPS for a specific country and save it into a csv file you
 simply run the following command:
 
 ```
-cd src
-python scrape_list_of_meps <url> --output <location>
-
+python src/scrape_list_of_meps <url> --output <location>
 ```
 
 For example to fetch the list of italian meps:
 
 ```
 cd src
-python3 scrape_list_of_meps.py "https://www.europarl.europa.eu/meps/en/download/advanced/xml?name=&countryCode=IT" --output 'data/meps_it.csv' 
+python src/scrape_list_of_meps.py "https://www.europarl.europa.eu/meps/en/download/advanced/xml?name=&countryCode=IT" --output 'data/meps_it.csv' 
 ```
 
 In this code the --ouptut parameter is where you save the output file.
