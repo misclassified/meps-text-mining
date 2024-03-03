@@ -101,3 +101,47 @@ def split_text_into_chunks(text, max_tokens):
         chunks.append(current_chunk.strip())
 
     return chunks
+
+
+def count_tokens(text):
+    # Split the text into words and count the number of words
+    words = text.split()
+    num_tokens = len(words)
+    return num_tokens
+
+
+def group_documents(documents, token_limit):
+    """Group contents by cutting at token limit
+    
+    Arguments:
+        documents: list
+        token_limit: int
+    """
+
+    chunks = []
+    temp_chunk = ''
+
+    # Remove any non string item
+    documents = list(filter(lambda x: isinstance(x, str), documents))
+
+    for idx, document in enumerate(documents):
+
+        if count_tokens(document) < token_limit:
+            
+            if count_tokens(temp_chunk + document) < token_limit:
+                temp_chunk += document
+
+                if idx+1 == len(documents):
+                    chunks.append(temp_chunk)
+            else:
+                chunks.append(temp_chunk)
+                print("Created chunk")
+                temp_chunk = document
+        else:
+            print("""Single speech larger than token limit, 
+                consider increasing limit or splitting""")
+            continue
+
+    print(f"Split the speeches in {len(chunks)}")
+    
+    return chunks

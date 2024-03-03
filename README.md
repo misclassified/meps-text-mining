@@ -80,3 +80,4 @@ python scrape_meps_speeches.py <meps list location> --update True
 ```
 
 Note: the scraping process is deliberately slow, with added sleep time to be respectul of the Europarliamt Website and not cause any harm to users. 
+

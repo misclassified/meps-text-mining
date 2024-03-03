@@ -19,6 +19,7 @@ PyYAML = "^6.0.1"
 llama-index = "^0.9.25.post1"
 transformers = "^4.36.2"
 torch = "^2.1.2"
+gradio = "^4.19.2"
 
 
 [tool.poetry.group.dev.dependencies]

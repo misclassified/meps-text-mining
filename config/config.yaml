@@ -21,3 +21,6 @@ meps_speeches_en_translation:
   output_dir: 'meps-text-mining/data/meps_speeches_en_translations'
   filename: 'speeches_translations.txt'
   logs_filename: 'translating_speeches.txt'
+
+meps_speeches_summaries:
+  output_dir: 'meps-text-mining/data/meps_speeches_summaries'
