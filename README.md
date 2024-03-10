@@ -3,7 +3,7 @@
 The objective of this project is the analysis of Member of European Parliaments work.
 
 After scraping the parliamentary interventions of MEPS, I'm interested in finding out how
-frequent each MP or group give contributions, which topics are more frequent and what 
+frequently each MP or group contributed, which topics are more frequent and what 
 sentiment is attached to those topics.
 
 The project uses ChatGPT for text analysis.
@@ -42,16 +42,6 @@ simply run the following command:
 ```
 python src/scrape_list_of_meps <url> --output <location>
 ```
-
-For example to fetch the list of italian meps:
-
-```
-cd src
-python src/scrape_list_of_meps.py "https://www.europarl.europa.eu/meps/en/download/advanced/xml?name=&countryCode=IT" --output 'data/meps_it.csv' 
-```
-
-In this code the --ouptut parameter is where you save the output file.
-
 
 ### Scrape speeches given a list of meps
 
