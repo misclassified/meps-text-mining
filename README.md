@@ -1,16 +1,10 @@
 # meps-text-mining
 
-The objective of this project is the analysis of Member of European Parliaments work.
-
-After scraping the parliamentary interventions of MEPS, I'm interested in finding out how
-frequently each MP or group contributed, which topics are more frequent and what 
-sentiment is attached to those topics.
-
-The project uses ChatGPT for text analysis.
+This project aims to analyze the work of Members of the European Parliament (MEPs). Through the extraction of parliamentary interventions, the focus is on determining the frequency of contributions by individual MPs or groups, identifying prevalent topics, and gauging the sentiment associated with these topics. The project utilizes Openai GPT 3.5 for text analysis.
 
 # Scraper
 
-I used Selenium with chromedriver for scraping. One pre-requirement to run the scraper is that you have chromedriver driver binaries on your computer. The driver should be in the same version of your current Chromer browser. The drivers can be dowloaded from: https://chromedriver.chromium.org/. Installation depends on your operating system, there are plenty of web resources with step by step. Generally speaking the chromedrive should be in your system path, which usually is /usr/local/bin/
+I used Selenium with chromedriver for scraping. One pre-requirement to run the scraper is that you have chromedriver driver binaries on your computer. The driver should be in the same version of your current Chromer browser. The drivers can be dowloaded from: https://chromedriver.chromium.org/. Installation depends on your operating system, there are plenty of web resources with step by step guides. Generally speaking the chromedrive should be in your system path, which usually is /usr/local/bin/
 
 On a MAC the easiest was to use Homebrew with cask, which will place the drivers in the opt/homebrew/caskroom folder:
 
@@ -30,7 +24,7 @@ poetry install
 
 ### Scrape list of meps for a given country
 
-The list of MEPS with ID, political group and national political group can be scraped from the european parliament 
+The list of MEPS with ID, political group and national political group can be scraped from the European Parliament 
 website. There is a list for each country that can be accessed by replacing the curly brackets in the URL below, 
 with the relevant country code of interest (IT, ES, DE, etc)
 
@@ -45,7 +39,7 @@ python src/scrape_list_of_meps <url> --output <location>
 
 ### Scrape speeches given a list of meps
 
-Once you have the list of Meps you can start scraping the speeches from the europarl website. **Note** -> The list of maps is a csv file with the following columns: 
+Once you have the list of Meps you can start scraping the speeches from the europarl website. **Note** -> The list of MEPS is a csv file with the following columns: 
 
 | Column      | Description |
 | ----------- | ----------- |
